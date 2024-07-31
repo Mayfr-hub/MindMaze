@@ -19,8 +19,7 @@ public class CircleConnector : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         if (circleNumber == currentNumber)
         {
             GetComponent<Image>().color = Color.green; // Change color to indicate it was clicked correctly
-            Vector3 worldPosition = transform.position;
-            gameManager.StartDragging(worldPosition);
+    
             Debug.Log("Correct Circle Pressed: " + circleNumber);
         }
         else
@@ -33,19 +32,11 @@ public class CircleConnector : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     {
         if (circleNumber == currentNumber)
         {
-            Vector3 worldPosition = transform.position;
-            gameManager.StopDragging(worldPosition);
-            gameManager.AddFinalPoint(worldPosition, true);
             Debug.Log("Correct Circle Released: " + circleNumber);
             currentNumber++;
-            if (currentNumber > gameManager.circles.Length)
-            {
-                gameManager.EndGame();
-            }
         }
         else
         {
-            gameManager.AddFinalPoint(Vector3.zero, false);
             Debug.Log("Incorrect Circle Released: " + circleNumber);
         }
     }
